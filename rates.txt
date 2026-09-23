@@ -1,0 +1,7 @@
+# Maximum minutes in each band, followed by price in KSh.
+# The last band uses -1 to mean "no upper limit".
+30 0
+120 50
+240 100
+360 300
+-1 500
