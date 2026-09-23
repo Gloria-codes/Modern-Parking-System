@@ -1,6 +1,4 @@
 #include "ParkingSystem.h"
-
-// Include basic C++ libraries for text formatting, files, and math
 #include <algorithm>
 #include <cctype>
 #include <fstream>
@@ -44,11 +42,11 @@ string ParkingSystem::normalizePlate(const string& plate) const {
     return result;
 }
 
-// Convert date and time into readable text (Format: YYYY-MM-DD HH:MM:SS).
+// Convert date and time into readable text.
 string ParkingSystem::timeToString(
     const chrono::system_clock::time_point& time) const {
 
-    // Get raw time value.
+    // Get original time value.
     time_t rawTime = chrono::system_clock::to_time_t(time);
     tm localTime{};
 
@@ -111,9 +109,9 @@ void ParkingSystem::showSlots() const {
     }
 
     // Print summary showing free spots left.
-    cout << "----------------------------------------\n";
+    cout << "\n";
     cout << "Free bays: " << freeCount << " / " << slots.size() << '\n';
-    cout << "========================================\n";
+    cout << "\n";
 }
 
 // Load parking rates from the "config/rates.txt" file.
@@ -259,12 +257,12 @@ void ParkingSystem::vehicleArrival() {
     }
 
     // Display ticket information on screen.
-    cout << "\n========== ENTRY TICKET ==========\n";
+    cout << "\nENTRY TICKET \n";
     cout << "Ticket ID: " << ticket.ticketId << '\n';
     cout << "Plate:     " << ticket.plate << '\n';
     cout << "Bay:       " << ticket.slotId << '\n';
     cout << "Entry:     " << timeToString(ticket.entryTime) << '\n';
-    cout << "==================================\n";
+    cout << "\n";
 
     addAudit("ENTRY", "Vehicle entered: " + plate);
 }
@@ -375,7 +373,7 @@ void ParkingSystem::vehicleExit() {
     double fee = calculateFee(rates, minutes);
 
     // Show exit receipt details.
-    cout << "\n========== EXIT BILL ==========\n";
+    cout << "\nEXIT BILL \n";
     cout << "Ticket ID: " << ticket.ticketId << '\n';
     cout << "Plate:     " << ticket.plate << '\n';
     cout << "Bay:       " << ticket.slotId << '\n';
@@ -383,7 +381,7 @@ void ParkingSystem::vehicleExit() {
     cout << "Exit:      " << timeToString(exitTime) << '\n';
     cout << "Duration:  " << minutes << " minute(s)\n";
     cout << "Amount:    KSh " << fixed << setprecision(2) << fee << '\n';
-    cout << "===============================\n";
+    cout << "\n";
 
     // Process payment before opening exit barrier.
     if (!processPayment(ticket, fee)) {
@@ -470,7 +468,7 @@ void ParkingSystem::showWaitingList() const {
         }
     }
 
-    cout << "===================================\n";
+    cout << "\n";
 }
 
 // Module 7: Check administrator password.
@@ -497,7 +495,7 @@ void ParkingSystem::adminMenu() {
 
     // Loop until user picks option 4 (Exit Admin Menu).
     while (choice != 4) {
-        cout << "\n========== ADMIN MENU ==========\n";
+        cout << "\nADMIN MENU \n";
         cout << "1. View current rates\n";
         cout << "2. Change a rate\n";
         cout << "3. View audit log\n";
@@ -583,7 +581,7 @@ void ParkingSystem::adminMenu() {
                 cout << '\n';
             }
 
-            cout << "================================\n";
+            cout << "\n";
         } else if (choice != 4) {
             cout << "Invalid choice.\n";
         }
@@ -611,7 +609,7 @@ void ParkingSystem::showReport() const {
     }
 
     // Print summary report.
-    cout << "\n========== MANAGEMENT REPORT ==========\n";
+    cout << "\nMANAGEMENT REPORT\n";
     cout << "Confirmed payments: " << payments.size() << '\n';
     cout << "M-Pesa total:       KSh " << fixed << setprecision(2)
          << mpesa << '\n';
@@ -624,7 +622,7 @@ void ParkingSystem::showReport() const {
     cout << "\nVAT: Not calculated because the assignment does not "
             "provide a VAT rate.\n";
 
-    cout << "========================================\n";
+    cout << "\n";
 }
 
 // Main interactive menu loop for running the parking application.
@@ -633,10 +631,10 @@ void ParkingSystem::run() {
 
     // Keep displaying system menu until user chooses option 7 (Exit).
     while (choice != 7) {
-        cout << "\n\n========================================\n";
+        cout << "\n";
         cout << "          PARKSMART KE\n";
         cout << "       MODERN PARKING SYSTEM\n";
-        cout << "========================================\n";
+        cout << "\n";
         cout << "1. View live parking board\n";
         cout << "2. Register vehicle arrival\n";
         cout << "3. Process vehicle exit\n";
