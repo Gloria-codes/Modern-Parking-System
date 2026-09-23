@@ -1,6 +1,6 @@
--- Dynamic database design for ParkSmart KE.
+-- Dynamic database design for ParkSmart .
 -- This is a relational design document.
--- The C++ demo stores data in memory so it can run without external packages.
+
 
 CREATE TABLE parking_slots (
     slot_id INTEGER PRIMARY KEY,
